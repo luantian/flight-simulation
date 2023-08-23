@@ -4,7 +4,7 @@ import type { ISixForceInterface } from "@/interface/SixForceInterface";
 export class PlaneF35 implements IPlane {
     name = "F35"; // 名称
     persons = 2; // 人数
-    weight = 31.8 * 1000; // 重量 kg
+    weight = 31800; // 重量 kg
     length = 15.67; // 长度
     span = 10.7; // 翼展
     height = 4.33; // 高度

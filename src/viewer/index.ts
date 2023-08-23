@@ -113,7 +113,7 @@ export class Viewer {
                 this.initStats();
                 this.addLights();
                 this.setModelCenter();
-                // this.createLand();
+                this.createLand();
                 this.linkCannon(gltf, this.plane);
                 callback && callback(gltf);
             },
@@ -197,10 +197,11 @@ export class Viewer {
         const floorMat = new MeshStandardMaterial({
             color: 0xa9a9a9, // 材质的颜色
         });
-        const floorGeometry = new BoxGeometry(1000, 300, 0.01, 1, 1, 1);
+        const floorGeometry = new BoxGeometry(1000, 1000, 0.01, 1, 1, 1);
         const floorMesh = new Mesh(floorGeometry, floorMat);
         floorMesh.receiveShadow = true;
         floorMesh.rotation.x = -Math.PI / 2.0;
+        floorMesh.position.y = -24;
         this.scene.add(floorMesh);
     }
 
@@ -212,7 +213,7 @@ export class Viewer {
 
         const boxShape = new Box(halfExtents);
         const boxBody = new Body({ mass: plane.weight, shape: boxShape });
-        boxBody.position.set(0, 200, 0);
+        boxBody.position.set(0, 50, 0);
         this.world.addBody(boxBody);
 
         const groundBody = new Body({
@@ -220,8 +221,9 @@ export class Viewer {
             shape: new Plane(),
         });
         groundBody.quaternion.setFromEuler(-Math.PI / 2, 0, 0); // make it face up
+        groundBody.position.y = -8;
         console.log('groundBody.position', groundBody.position)
-        groundBody.position.y = 190;
+
         this.world.addBody(groundBody);
         const animate = () => {
             requestAnimationFrame(animate);
